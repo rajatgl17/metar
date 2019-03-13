@@ -1,4 +1,4 @@
-# Mater
+# Metar
 
 Pre-requisites:
 - Java 8 (JDK) installed
