@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.anaek.metar.exception.InvalidInputException;
 import com.anaek.metar.utils.Constants;
 
 @Component
@@ -33,19 +34,22 @@ public class MetarApiTemplate {
 	private String getWeatherData(String scode) {
 		String url = materUrl.replace(Constants.SCODE_PATTERN, scode);
 		LOGGER.info("Calling URL : {}", url);
+		
+		ResponseEntity<String> response = null;
+
 		try {
-			ResponseEntity<String> response = new RestTemplate().getForEntity(url, String.class);
-			if (response.getStatusCode() == HttpStatus.OK) {
-				LOGGER.info("Response : {}", response.getBody());
-				return response.getBody();
-			} else {
-				LOGGER.error("Error while calling mater API, status : {}", response.getStatusCode());
-			}
-		} catch (Exception e) {
-
+			response = new RestTemplate().getForEntity(url, String.class);
+		} catch(Exception e) {
+			throw new InvalidInputException("Invalid input scode : " + scode);
 		}
-
-		return null;
+		
+		if (response.getStatusCode() == HttpStatus.OK) {
+			LOGGER.info("Response : {}", response.getBody());
+			return response.getBody();
+		} else {
+			LOGGER.error("Error while calling mater API, status : {}", response.getStatusCode());
+			throw new InvalidInputException("Invalid input scode : " + scode);
+		}
 	}
 
 }

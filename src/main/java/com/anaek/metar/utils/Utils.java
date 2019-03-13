@@ -7,14 +7,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.anaek.metar.exception.ResponseParseException;
 import com.anaek.metar.model.MetarVO;
 
 public class Utils {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(Utils.class);
 
 	private static final DateFormat RESPONSE_FORMAT = new SimpleDateFormat(Constants.DATE_FORMAT_1, Locale.ENGLISH);
 
@@ -36,10 +32,8 @@ public class Utils {
 			mater.setWind(windParser(codes));
 			return mater;
 		} catch (Exception e) {
-			LOGGER.error("Exception occured while parsing : {}", e);
+			throw new ResponseParseException("Internal error while parsing response");
 		}
-
-		return null;
 	}
 
 	private static String parseDate(String response) throws ParseException {

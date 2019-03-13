@@ -15,9 +15,6 @@ public class MetarService {
 	public MetarVO getWeatherInformation(String scode, Integer nocache) throws Exception {
 		String response = nocache == 1 ? metarApiTemplate.getWeatherDataWithoutCache(scode)
 				: metarApiTemplate.getWeatherDataWithCache(scode);
-		if(response == null) {
-			throw new Exception("Invalid scode");
-		}
 		return Utils.parser(response);
 	}
 
