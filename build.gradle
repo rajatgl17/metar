@@ -6,7 +6,6 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.anaek.metar'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -17,4 +16,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	compile('redis.clients:jedis')
 }

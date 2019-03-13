@@ -16,4 +16,10 @@ public class Constants {
 	
 	public static final String WIND_REGEX = "KT";
 	
+	public static final String DIRECTIONS[] = {"N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"};
+	
+	public static final char NEGATIVE_CHAR = 'M';
+	
+	public static final String TEMP_SPLITTER = "/";
+	
 }

@@ -2,7 +2,10 @@ package com.anaek.metar.model;
 
 import java.io.Serializable;
 
-public class MaterVO implements Serializable {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class MetarVO implements Serializable {
 
 	private static final long serialVersionUID = 3034328696873590269L;
 
